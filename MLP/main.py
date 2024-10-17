@@ -25,3 +25,12 @@ model.add(layers.Dense(64,activation="relu"))
 
 # Add the output layer
 model.add(layers.Dense(10,activation="softmax"))
+
+# Compile the model
+model.compile(optimizer='adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+# Train the model for 20 epochs and store history
+history = model.fit(train_images, train_labels, epochs=20, batch_size=32, validation_data=(test_images, test_labels))
+
