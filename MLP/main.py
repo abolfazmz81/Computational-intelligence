@@ -1,8 +1,26 @@
-import tensorflow as tf
 import keras
 from keras.api.datasets import mnist
 from keras import layers,models
 import matplotlib.pyplot as plt
+import numpy as np
+from PIL import Image
+
+
+# Function to preprocess an external(handwritten) image
+def preprocess_image(image_path):
+    # Load the image and convert to grayscale
+    img = Image.open(image_path).convert('L')  # 'L' converts to grayscale
+
+    # Resize to 28x28 pixels (same as MNIST)
+    img = img.resize((28, 28))
+
+    # Convert image to a NumPy array and normalize (0-255 -> 0-1)
+    img = np.array(img) / 255.0
+
+    # Flatten the image to a 784-element vector (just like the MNIST dataset)
+    img = img.reshape((784,))
+
+    return img
 
 # Load the dataset
 (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
