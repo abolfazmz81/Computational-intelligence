@@ -58,3 +58,8 @@ plt.legend()
 
 # Show the plots
 plt.show()
+
+# Evaluate the model on the test dataset
+test_loss, test_accuracy = model.evaluate(test_images, test_labels)
+
+print(f"Test Accuracy: {test_accuracy:.4f}")
