@@ -4,6 +4,7 @@ from keras import layers, models
 import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
+import os
 
 
 # Function to preprocess an external(handwritten) image
@@ -29,6 +30,23 @@ def display_prediction(image, predicted_label):
     plt.title(f"Predicted: {predicted_label}")
     plt.axis('off')
     plt.show()
+
+
+# Function to load and preprocess all images in the directory
+def load_and_preprocess_images(directory):
+    images = []
+    image_files = os.listdir(directory)  # List of image filenames in the directory
+
+    for image_file in image_files:
+        # Preprocess each image
+        image_path = os.path.join(directory, image_file)
+        preprocessed_image = preprocess_image(image_path)
+        images.append(preprocessed_image)
+
+    # Convert the list of images to a NumPy array (batch)
+    images = np.array(images)
+
+    return images, image_files
 
 
 # Load the dataset
