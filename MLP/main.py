@@ -15,8 +15,14 @@ def preprocess_image(image_path):
     # Resize to 28x28 pixels (same as MNIST)
     img = img.resize((28, 28))
 
-    # Convert image to a NumPy array and normalize (0-255 -> 0-1)
-    img = np.array(img) / 255.0
+    # Convert image to a NumPy array
+    img = np.array(img)
+
+    # Invert the image (black on white -> white on black)
+    img = np.invert(img)
+
+    # Normalize the pixel values (0-255 -> 0-1)
+    img = img / 255.0
 
     # Flatten the image to a 784-element vector (just like the MNIST dataset)
     img = img.reshape((784,))
