@@ -2,6 +2,7 @@ import tensorflow as tf
 import keras
 from keras.api.datasets import mnist
 from keras import layers,models
+import matplotlib.pyplot as plt
 
 # Load the dataset
 (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
@@ -34,3 +35,26 @@ model.compile(optimizer='adam',
 # Train the model for 20 epochs and store history
 history = model.fit(train_images, train_labels, epochs=20, batch_size=32, validation_data=(test_images, test_labels))
 
+# Plot the accuracy and loss over the training period
+plt.figure(figsize=(12, 5))
+
+# Accuracy graph
+plt.subplot(1, 2, 1)
+plt.plot(history.history['accuracy'], label='Training Accuracy')
+plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
+plt.title('Training and Validation Accuracy')
+plt.xlabel('Epochs')
+plt.ylabel('Accuracy')
+plt.legend()
+
+# Loss graph
+plt.subplot(1, 2, 2)
+plt.plot(history.history['loss'], label='Training Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.title('Training and Validation Loss')
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.legend()
+
+# Show the plots
+plt.show()
