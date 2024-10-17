@@ -108,3 +108,24 @@ plt.show()
 test_loss, test_accuracy = model.evaluate(test_images, test_labels)
 
 print(f"Test Accuracy: {test_accuracy:.4f}")
+
+# Directory where external(handwritten images are stored
+image_directory = "./handwritten_numbers"
+
+# Load and preprocess images
+external_images, image_filenames = load_and_preprocess_images(image_directory)
+
+# Make predictions for the images
+predictions = model.predict(external_images)
+
+# Display the images and the model's predictions
+for i, image_filename in enumerate(image_filenames):
+    # Reshape the image back to 28x28 for display purposes
+    image_reshaped = external_images[i].reshape(28, 28)
+
+    # Get the predicted label
+    predicted_label = np.argmax(predictions[i])
+
+    # Display the image and the result
+    print(f"Image: {image_filename}, Predicted Label: {predicted_label}")
+    display_prediction(image_reshaped, predicted_label)
