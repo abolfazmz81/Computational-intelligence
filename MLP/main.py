@@ -1,6 +1,6 @@
 import keras
 from keras.api.datasets import mnist
-from keras import layers,models
+from keras import layers, models
 import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
@@ -22,6 +22,15 @@ def preprocess_image(image_path):
 
     return img
 
+
+# Function to display the image and its predicted label
+def display_prediction(image, predicted_label):
+    plt.imshow(image)
+    plt.title(f"Predicted: {predicted_label}")
+    plt.axis('off')
+    plt.show()
+
+
 # Load the dataset
 (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
 
@@ -37,13 +46,13 @@ test_labels = keras.utils.to_categorical(test_labels, 10)
 model = models.Sequential()
 
 # Add the first hidden layer
-model.add(layers.Dense(128,activation="relu",input_shape=(784,)))
+model.add(layers.Dense(128, activation="relu", input_shape=(784,)))
 
 # Add the second hidden layer
-model.add(layers.Dense(64,activation="relu"))
+model.add(layers.Dense(64, activation="relu"))
 
 # Add the output layer
-model.add(layers.Dense(10,activation="softmax"))
+model.add(layers.Dense(10, activation="softmax"))
 
 # Compile the model
 model.compile(optimizer='adam',
