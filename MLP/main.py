@@ -21,11 +21,8 @@ def preprocess_image(image_path):
     # Invert the image (black on white -> white on black)
     img = np.invert(img)
 
-    # Normalize the pixel values (0-255 -> 0-1)
-    img = img / 255.0
-
     # Flatten the image to a 784-element vector (just like the MNIST dataset)
-    img = img.reshape((784,))
+    img = img.reshape((784,)).astype('float32') / 255
 
     return img
 
