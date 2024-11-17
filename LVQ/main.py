@@ -1,4 +1,5 @@
 import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
 # Load the dataset
 file_path = 'LVQ_data.csv'
 data = pd.read_csv(file_path)
@@ -16,4 +17,12 @@ data_cleaned = data_cleaned[
 
 # Display results of cleaning
 print(f"Total rows remaining: {data_cleaned.shape[0]}")
+
+# Columns we need to normalize
+columns_to_normalize = ["TimeTaken", "NumberOfAttempts", "CodeSimilarity", "NumberOfRequests"]
+
+# Initialize the Min Max scaler(range between 0 and 1)
+scalar = MinMaxScaler()
+
+
 
