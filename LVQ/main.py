@@ -22,7 +22,13 @@ print(f"Total rows remaining: {data_cleaned.shape[0]}")
 columns_to_normalize = ["TimeTaken", "NumberOfAttempts", "CodeSimilarity", "NumberOfRequests"]
 
 # Initialize the Min Max scaler(range between 0 and 1)
-scalar = MinMaxScaler()
+scaler = MinMaxScaler()
 
+# Apply the scaler to the columns
+data_cleaned[columns_to_normalize] = scaler.fit_transform(data_cleaned[columns_to_normalize])
+
+# Display the normalized data
+print("Normalized Data:")
+print(data_cleaned.head())
 
 
