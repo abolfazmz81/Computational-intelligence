@@ -32,3 +32,25 @@ class LVQ:
 
         self.weights = np.array(self.weights)
         self.labels = np.array(self.labels)
+
+    def train(self, x, y):
+        # train the LVQ model
+
+        # Initialize weight vectors
+        self.weight_vectors(x, y)
+
+        # Loop for each epoch
+        for ep in range(self.epoch):
+            # Loop all the dataset
+            for i, X in enumerate(x):
+                # Determining closest prototype
+                distances = np.array([self.euclidean_distance(X,l) for l in self.labels])
+                closest_index = np.argmax(distances)
+                # Check its correct or incorrect
+                if y[i] == self.labels[closest_index]:
+                    # Pull closer if correct
+                    self.weights[closest_index] += self.learning_rate*(X-self.weights[closest_index])
+                else:
+                    # Push further if incorrect
+                    self.weights[closest_index] -= self.learning_rate*(X-self.weights[closest_index])
+    
