@@ -1,6 +1,9 @@
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, accuracy_score
+
+from LVQ import LVQ
 
 # Change display sizes
 pd.set_option('display.width', 1000)
@@ -48,3 +51,17 @@ y = data_cleaned["IsCheater"]  # Target
 # Split the dataset into training and test sets
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=42)
 
+# Initialize LVQ model
+lvq = LVQ(prototypes_per_class=2, learning_rate=0.1, epoch=20)
+
+# Train model
+lvq.train(X_train, y_train)
+
+# Predict on the test set
+predictions = lvq.predic(X_test)
+
+# Evaluate the model
+print("Classification Report:")
+print(classification_report(y_test, predictions))
+
+print("Accuracy:", accuracy_score(y_test, predictions))
