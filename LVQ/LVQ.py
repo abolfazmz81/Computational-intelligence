@@ -1,3 +1,5 @@
+import numpy as np
+
 class LVQ:
 
     def __init__(self,prototype_per_class=1, epoch=20,learning_rate=0.1):
@@ -7,4 +9,6 @@ class LVQ:
         self.prototypes = None
         self.labels = None
 
-    
+    def euclidean_distance(self, x, prototype):
+        """Calculate Euclidean distance between a sample and a prototype."""
+        return np.sqrt(np.sum((x - prototype) ** 2))
