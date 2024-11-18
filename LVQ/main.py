@@ -1,5 +1,11 @@
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+
+# Change display sizes
+pd.set_option('display.width', 1000)
+pd.set_option('display.max_columns', 1000)
+
 # Load the dataset
 file_path = 'LVQ_data.csv'
 data = pd.read_csv(file_path)
