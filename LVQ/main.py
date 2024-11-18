@@ -37,4 +37,8 @@ data_cleaned[columns_to_normalize] = scaler.fit_transform(data_cleaned[columns_t
 print("Normalized Data:")
 print(data_cleaned.head())
 
+# Drop and display ID column
+data_cleaned = data_cleaned.drop(columns=["ParticipantID"])
+print(data_cleaned.head())
+
 
