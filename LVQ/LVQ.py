@@ -53,4 +53,11 @@ class LVQ:
                 else:
                     # Push further if incorrect
                     self.weights[closest_index] -= self.learning_rate*(X-self.weights[closest_index])
-    
+
+    def predic(self,x):
+        predictions = []
+        for X in x:
+            distances = np.array([self.euclidean_distance(X, p) for p in self.weights])
+            closest_idx = np.argmin(distances)
+            predictions.append(self.labels[closest_idx])
+        return np.array(predictions)
