@@ -41,4 +41,10 @@ print(data_cleaned.head())
 data_cleaned = data_cleaned.drop(columns=["ParticipantID"])
 print(data_cleaned.head())
 
+# Separate features and target
+X = data_cleaned.drop(columns=["IsCheater"])  # Features
+y = data_cleaned["IsCheater"]  # Target
+
+# Split the dataset into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
 
