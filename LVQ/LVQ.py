@@ -35,7 +35,8 @@ class LVQ:
 
     def train(self, x, y):
         # train the LVQ model
-
+        x = np.asarray(x)
+        y = np.asarray(y)
         # Initialize weight vectors
         self.weight_vectors(x, y)
 
@@ -55,6 +56,7 @@ class LVQ:
                     self.weights[closest_index] -= self.learning_rate*(X-self.weights[closest_index])
 
     def predic(self,x):
+        x = np.asarray(x)
         predictions = []
         for X in x:
             distances = np.array([self.euclidean_distance(X, p) for p in self.weights])
