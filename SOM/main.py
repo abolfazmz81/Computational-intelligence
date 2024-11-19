@@ -113,3 +113,10 @@ plt.legend(handles=[
 # Show plot
 plt.tight_layout()
 plt.show()
+
+# Count the number of samples in each cluster
+cluster_counts = iris_df['cluster'].value_counts().sort_index()
+
+# Display the cluster counts
+print("Number of samples in each cluster:")
+print(cluster_counts)
