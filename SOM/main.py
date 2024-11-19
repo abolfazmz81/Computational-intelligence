@@ -120,3 +120,14 @@ cluster_counts = iris_df['cluster'].value_counts().sort_index()
 # Display the cluster counts
 print("Number of samples in each cluster:")
 print(cluster_counts)
+
+
+# Map SOM clusters to actual labels by giving each cluster the most target it has
+def map_clusters_to_labels(df, cluster_col, label_col):
+    cluster_to_label = {}
+    for cluster in df[cluster_col].unique():
+        # Find the most common true label in each cluster
+        label_counts = df[df[cluster_col] == cluster][label_col].value_counts()
+        cluster_to_label[cluster] = label_counts.idxmax()
+    return cluster_to_label
+
