@@ -1,6 +1,10 @@
 from sklearn.datasets import load_iris
 import pandas as pd
 
+# Change display sizes
+pd.set_option('display.width', 1000)
+pd.set_option('display.max_columns', 1000)
+
 # Load the Iris dataset
 iris = load_iris()
 
