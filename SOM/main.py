@@ -43,13 +43,13 @@ scaler = MinMaxScaler()
 iris_df[columns_to_normalize] = scaler.fit_transform(iris_df[columns_to_normalize])
 
 # Display normalized data
-print(iris_df.head(15))
+print("normalized data:\n" ,iris_df.head(15))
 
 # Prepare the feature data
 X = iris_df.iloc[:, :-1].values  # Features
 
 # Define SOM parameters
-som_dimensions = (5, 5)  # 10x10 grid
+som_dimensions = (5, 5)  # 5x5 grid
 learning_rate = 0.1
 initial_radius = max(som_dimensions) / 2
 num_iterations = 500
