@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from minisom import MiniSom
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Change display sizes
 pd.set_option('display.width', 1000)
@@ -76,3 +77,39 @@ clusters = ['{}-{}'.format(row, col) for row, col in winning_neurons]
 # Add the cluster information to the original dataset
 iris_df['cluster'] = clusters
 
+# Visualization: Scatter plot for clustering
+feature_x = 'sepal length (cm)'
+feature_y = 'sepal width (cm)'
+
+# Assign unique colors to each cluster
+unique_clusters = iris_df['cluster'].unique()
+cluster_colors = {cluster: idx for idx, cluster in enumerate(unique_clusters)}
+colors = iris_df['cluster'].map(cluster_colors)
+
+# Scatter plot
+plt.figure(figsize=(10, 7))
+plt.scatter(
+    iris_df[feature_x],
+    iris_df[feature_y],
+    c=colors,
+    cmap='tab10',
+    s=50,
+    alpha=0.7
+)
+
+# Add labels and title
+plt.title('SOM Clustering Visualization (Sepal Length vs Sepal Width)')
+plt.xlabel(feature_x)
+plt.ylabel(feature_y)
+
+# Create a legend
+scatter_labels = [f"Cluster {c}" for c in cluster_colors.keys()]
+plt.legend(handles=[
+    plt.Line2D([0], [0], marker='o', color='w', label=label,
+               markersize=10, markerfacecolor=plt.cm.tab10(idx / len(unique_clusters)))
+    for label, idx in cluster_colors.items()
+], title="Clusters", bbox_to_anchor=(1.05, 1), loc='upper left')
+
+# Show plot
+plt.tight_layout()
+plt.show()
