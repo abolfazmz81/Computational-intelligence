@@ -4,6 +4,7 @@ from sklearn.preprocessing import MinMaxScaler
 from minisom import MiniSom
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix, accuracy_score
 
 # Change display sizes
 pd.set_option('display.width', 1000)
@@ -43,7 +44,7 @@ scaler = MinMaxScaler()
 iris_df[columns_to_normalize] = scaler.fit_transform(iris_df[columns_to_normalize])
 
 # Display normalized data
-print("normalized data:\n" ,iris_df.head(15))
+print("normalized data:\n", iris_df.head(15))
 
 # Prepare the feature data
 X = iris_df.iloc[:, :-1].values  # Features
@@ -131,3 +132,31 @@ def map_clusters_to_labels(df, cluster_col, label_col):
         cluster_to_label[cluster] = label_counts.idxmax()
     return cluster_to_label
 
+
+# Apply the mapping
+cluster_to_label_map = map_clusters_to_labels(iris_df, 'cluster', 'target')
+
+# Map the predicted clusters to the most likely true labels
+iris_df['predicted_label'] = iris_df['cluster'].map(cluster_to_label_map)
+
+# Calculate accuracy
+accuracy = accuracy_score(iris_df['target'], iris_df['predicted_label'])
+
+# Generate confusion matrix
+conf_matrix = confusion_matrix(iris_df['target'], iris_df['predicted_label'])
+
+# Display results
+print(f"\nAccuracy of SOM Clustering:{accuracy*100}%")
+
+# Get class labels
+class_labels = ['Predicted: ' + str(i) for i in range(len(conf_matrix))]
+
+# Create a DataFrame for the confusion matrix
+conf_matrix_df = pd.DataFrame(
+    conf_matrix,
+    index=[f"True: {i}" for i in range(len(conf_matrix))],  # Row labels (True classes)
+    columns=class_labels  # Column labels (Predicted classes)
+)
+
+# Display Confusion matrix
+print(conf_matrix_df)
