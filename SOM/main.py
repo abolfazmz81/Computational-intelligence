@@ -48,7 +48,7 @@ print(iris_df.head(15))
 X = iris_df.iloc[:, :-1].values  # Features
 
 # Define SOM parameters
-som_dimensions = (10, 10)  # 10x10 grid
+som_dimensions = (5, 5)  # 10x10 grid
 learning_rate = 0.1
 initial_radius = max(som_dimensions) / 2
 num_iterations = 500
@@ -66,4 +66,13 @@ som.random_weights_init(X)
 # Train the SOM
 # Automatically handles updating the weights and Gradual reduction of learning rate and radius
 som.train_random(data=X, num_iteration=num_iterations)
+
+# Allocate each data point to the closest neuron (BMU)
+winning_neurons = [som.winner(x) for x in X]
+
+# Convert BMU(Best Matching Unit) coordinates (row, col) into a unique cluster ID
+clusters = ['{}-{}'.format(row, col) for row, col in winning_neurons]
+
+# Add the cluster information to the original dataset
+iris_df['cluster'] = clusters
 
