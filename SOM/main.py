@@ -1,5 +1,6 @@
 from sklearn.datasets import load_iris
 import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
 
 # Change display sizes
 pd.set_option('display.width', 1000)
@@ -28,3 +29,15 @@ feature_distributions = iris_df.describe()
 print("Data Types:\n", data_types)
 print("\nMissing Values:\n", missing_values)
 print("\nFeature Distributions:\n", feature_distributions)
+
+# Columns to normalize
+columns_to_normalize = ["sepal length (cm)", "sepal width (cm)", "petal length (cm)", "petal width (cm)"]
+
+# Initialize the Min Max scaler(range between 0 and 1)
+scaler = MinMaxScaler()
+
+# Apply scaler
+iris_df[columns_to_normalize] = scaler.fit_transform(iris_df[columns_to_normalize])
+
+# Display normalized data
+print(iris_df.head(15))
