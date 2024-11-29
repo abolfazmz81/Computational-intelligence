@@ -28,8 +28,6 @@ class QLearningAgent:
         self.user_profiles = user_profiles
         self.content_data = content_data
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
         # Initialize Q-table with state-action pairs: (user_id, content_id)
         for user in user_profiles:
             for content in content_data:
@@ -37,6 +35,17 @@ class QLearningAgent:
                     action: 0 for action in range(1, len(content_data) + 1)  # Actions are content IDs
                 }
 
+    def get_action(self, user_id, content_ids):
+        """
+        Select an action using epsilon-greedy strategy:
+        - With probability epsilon, choose a random action (exploration).
+        - With probability (1 - epsilon), choose the best action (exploitation).
+        """
+        if random.uniform(0, 1) < EPSILON:
+            return random.choice(content_ids)  # Exploration
+        else:
+            q_values = {content_id: self.q_table[(user_id, content_id)][content_id] for content_id in content_ids}
+            return max(q_values, key=q_values.get)  # Exploitation
 
 
 def print_hi(name):
