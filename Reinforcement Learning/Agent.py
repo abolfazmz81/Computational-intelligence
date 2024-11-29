@@ -134,6 +134,9 @@ def main():
                 'interaction': row['interaction']
             })
 
+    # Train the agent
+    agent.train(interactions_data, epochs=100)
+
 
 
 if __name__ == '__main__':
