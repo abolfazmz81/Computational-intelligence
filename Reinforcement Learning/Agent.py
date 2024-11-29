@@ -65,6 +65,30 @@ class QLearningAgent:
         self.q_table[(user_id, content_id)][content_id] = current_q_value + ALPHA * (
                     reward + GAMMA * max_future_q - current_q_value)
 
+    def train(self, interactions_data, epochs=100):
+        """
+        Train the Q-Learning agent using interaction data.
+        """
+        for epoch in range(epochs):
+            for interaction in interactions_data:
+                user_id = interaction['user_id']
+                content_id = interaction['content_id']
+                interaction_type = interaction['interaction']
+
+                # Simulate recommending 2 content based on the past or randomly selected
+                recommended_content = []
+                for i in range(2):
+                    # Epsilon chance for
+                    recommended_content.append(
+                        self.get_action(user_id, [content['content_id'] for content in self.content_data]))
+                # recommended_content = random.sample(self.content_data, 2) # Alternative that uses completely random selection
+                next_content_ids = [content for content in recommended_content]
+                # Get the action (recommended content) and update Q-value based on user feedback
+                self.update_q_value(user_id, content_id, interaction_type, next_content_ids)
+
+            if epoch % 10 == 0:
+                print(f"Epoch {epoch}/{epochs} completed.")
+
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
