@@ -47,6 +47,24 @@ class QLearningAgent:
             q_values = {content_id: self.q_table[(user_id, content_id)][content_id] for content_id in content_ids}
             return max(q_values, key=q_values.get)  # Exploitation
 
+    def update_q_value(self, user_id, content_id, interaction, next_content_ids):
+        """ Update the Q-value based on the reward for the given user-content interaction. """
+        reward = INTERACTION_REWARDS.get(interaction, 0)
+
+        # Current Q-value for the user-content pair
+        current_q_value = self.q_table[(user_id, content_id)][content_id]
+
+        # Get the Q-values for the next content recommendations
+        next_q_values = [self.q_table[(user_id, next_content_id)].get(next_content_id, 0) for next_content_id in
+                         next_content_ids]
+
+        # Calculate the max Q-value for the next recommended content
+        max_future_q = max(next_q_values) if next_q_values else 0
+
+        # Update the Q-value for the current (user_id, content_id) pair using the Q-learning update rule
+        self.q_table[(user_id, content_id)][content_id] = current_q_value + ALPHA * (
+                    reward + GAMMA * max_future_q - current_q_value)
+
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
