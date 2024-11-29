@@ -26,10 +26,6 @@ for user_id in range(1, 101):
     interests = random.sample(genres, random.randint(2, 5))
 
     # Simulate some interaction history
-    interactions = []
-    for content_id in range(1, 6):  # Simulate 5 content interactions(Fake)
-        feedback = choice(['liked', 'disliked', 'watched', 'skipped'])
-        interactions.append(f"{content_id}:{feedback}")
 
     # Store the user profile data
     user_profiles.append({
@@ -37,13 +33,12 @@ for user_id in range(1, 101):
         'age': age,
         'gender': gender,
         'location': location,
-        'interests': ", ".join(interests),
-        'interaction_history': "; ".join(interactions)
+        'interests': ", ".join(interests)
     })
 
 # Write the data to a CSV file
 with open('user_profiles.csv', mode='w', newline='') as file:
-    fieldnames = ['user_id', 'age', 'gender', 'location', 'interests', 'interaction_history']
+    fieldnames = ['user_id', 'age', 'gender', 'location', 'interests']
     writer = csv.DictWriter(file, fieldnames=fieldnames)
 
     writer.writeheader()

@@ -1,101 +1,101 @@
-user_id,age,gender,location,interests,interaction_history
-1,65,M,"Madrid, Spain","comedy, thriller",1:disliked; 2:disliked; 3:skipped; 4:skipped; 5:skipped
-2,41,F,"Madrid, Spain","romance, comedy, sci-fi, thriller, anime",1:liked; 2:disliked; 3:disliked; 4:liked; 5:watched
-3,44,F,"New York, USA","horror, disturbing",1:skipped; 2:disliked; 3:liked; 4:skipped; 5:disliked
-4,53,F,"Sydney, Australia","comedy, adventure, fantasy",1:disliked; 2:liked; 3:watched; 4:disliked; 5:disliked
-5,49,M,"Madrid, Spain","action, comedy, anime",1:skipped; 2:skipped; 3:skipped; 4:disliked; 5:liked
-6,38,M,"Tehran, Iran","drama, disturbing",1:skipped; 2:liked; 3:watched; 4:disliked; 5:watched
-7,57,M,"Tokyo, Japan","thriller, horror, comedy",1:liked; 2:disliked; 3:liked; 4:liked; 5:watched
-8,34,F,"New York, USA","thriller, action, romance",1:skipped; 2:skipped; 3:disliked; 4:watched; 5:disliked
-9,60,M,"Sydney, Australia","comedy, documentary, fantasy, adventure, sci-fi",1:skipped; 2:liked; 3:disliked; 4:disliked; 5:skipped
-10,39,M,"Toronto, Canada","documentary, disturbing, anime",1:watched; 2:watched; 3:disliked; 4:skipped; 5:disliked
-11,54,M,"Cape Town, South Africa","adventure, documentary, sci-fi, disturbing, fantasy",1:watched; 2:disliked; 3:skipped; 4:watched; 5:disliked
-12,28,F,"Tokyo, Japan","sci-fi, drama, comedy, horror, disturbing",1:skipped; 2:disliked; 3:liked; 4:disliked; 5:watched
-13,20,F,"Sydney, Australia","adventure, thriller, comedy, sci-fi",1:disliked; 2:disliked; 3:liked; 4:watched; 5:watched
-14,49,M,"Mumbai, India","action, romance",1:disliked; 2:skipped; 3:liked; 4:liked; 5:disliked
-15,57,M,"Paris, France","adventure, comedy, anime, documentary, drama",1:skipped; 2:watched; 3:liked; 4:liked; 5:skipped
-16,56,F,"Madrid, Spain","horror, documentary, fantasy",1:liked; 2:skipped; 3:watched; 4:skipped; 5:disliked
-17,54,M,"Madrid, Spain","drama, anime, action, fantasy",1:liked; 2:liked; 3:watched; 4:liked; 5:disliked
-18,24,M,"London, UK","fantasy, horror, documentary, action, thriller",1:skipped; 2:disliked; 3:watched; 4:disliked; 5:skipped
-19,39,F,"Tokyo, Japan","romance, thriller, anime, horror",1:liked; 2:disliked; 3:disliked; 4:disliked; 5:disliked
-20,18,M,"Paris, France","comedy, horror, documentary",1:liked; 2:watched; 3:skipped; 4:watched; 5:skipped
-21,48,F,"Cape Town, South Africa","romance, fantasy",1:skipped; 2:skipped; 3:skipped; 4:liked; 5:skipped
-22,25,F,"London, UK","adventure, anime",1:skipped; 2:skipped; 3:disliked; 4:skipped; 5:skipped
-23,46,M,"Mumbai, India","romance, adventure, fantasy, sci-fi, anime",1:skipped; 2:disliked; 3:disliked; 4:liked; 5:disliked
-24,56,M,"Madrid, Spain","horror, adventure, thriller, sci-fi, disturbing",1:skipped; 2:skipped; 3:disliked; 4:skipped; 5:disliked
-25,22,M,"London, UK","documentary, disturbing, fantasy, adventure",1:watched; 2:liked; 3:skipped; 4:disliked; 5:skipped
-26,37,M,"Berlin, Germany","documentary, adventure, romance, comedy",1:watched; 2:liked; 3:watched; 4:skipped; 5:skipped
-27,24,F,"London, UK","comedy, action, horror, thriller",1:disliked; 2:watched; 3:disliked; 4:liked; 5:skipped
-28,42,M,"Tokyo, Japan","adventure, comedy, disturbing, anime, thriller",1:watched; 2:liked; 3:watched; 4:skipped; 5:watched
-29,35,M,"Tehran, Iran","sci-fi, thriller",1:watched; 2:watched; 3:liked; 4:skipped; 5:disliked
-30,29,M,"Tehran, Iran","thriller, drama, anime",1:watched; 2:skipped; 3:disliked; 4:skipped; 5:watched
-31,44,M,"Berlin, Germany","anime, documentary, thriller, romance",1:liked; 2:liked; 3:disliked; 4:skipped; 5:disliked
-32,31,F,"Toronto, Canada","drama, thriller, documentary, adventure, disturbing",1:skipped; 2:liked; 3:watched; 4:skipped; 5:watched
-33,60,F,"Mexico City, Mexico","fantasy, thriller",1:disliked; 2:disliked; 3:liked; 4:skipped; 5:liked
-34,43,M,"New York, USA","action, documentary, romance, sci-fi",1:disliked; 2:skipped; 3:liked; 4:disliked; 5:liked
-35,32,M,"London, UK","adventure, horror, comedy, documentary, fantasy",1:skipped; 2:watched; 3:disliked; 4:watched; 5:skipped
-36,56,M,"Sydney, Australia","fantasy, disturbing",1:disliked; 2:skipped; 3:disliked; 4:skipped; 5:skipped
-37,48,M,"New York, USA","drama, romance",1:liked; 2:liked; 3:liked; 4:skipped; 5:watched
-38,45,F,"Mexico City, Mexico","documentary, disturbing",1:liked; 2:watched; 3:watched; 4:liked; 5:liked
-39,42,F,"Cape Town, South Africa","sci-fi, documentary, horror",1:liked; 2:skipped; 3:watched; 4:skipped; 5:liked
-40,19,F,"Mexico City, Mexico","action, fantasy, documentary",1:skipped; 2:disliked; 3:watched; 4:skipped; 5:liked
-41,57,M,"Tokyo, Japan","drama, thriller, disturbing, anime, romance",1:skipped; 2:liked; 3:skipped; 4:watched; 5:watched
-42,39,F,"London, UK","comedy, fantasy",1:liked; 2:watched; 3:liked; 4:skipped; 5:skipped
-43,35,M,"Toronto, Canada","drama, disturbing, thriller, sci-fi, horror",1:disliked; 2:skipped; 3:liked; 4:skipped; 5:watched
-44,45,F,"Mumbai, India","adventure, thriller",1:watched; 2:liked; 3:skipped; 4:skipped; 5:disliked
-45,28,F,"Tehran, Iran","disturbing, thriller, adventure",1:skipped; 2:watched; 3:liked; 4:skipped; 5:watched
-46,65,M,"Toronto, Canada","comedy, disturbing, action, adventure, drama",1:disliked; 2:liked; 3:liked; 4:disliked; 5:watched
-47,18,F,"Toronto, Canada","thriller, adventure",1:disliked; 2:liked; 3:disliked; 4:disliked; 5:disliked
-48,37,F,"Mexico City, Mexico","documentary, adventure",1:skipped; 2:liked; 3:watched; 4:watched; 5:disliked
-49,45,F,"New York, USA","fantasy, thriller",1:disliked; 2:watched; 3:watched; 4:skipped; 5:liked
-50,21,M,"Toronto, Canada","anime, thriller, documentary",1:skipped; 2:liked; 3:skipped; 4:watched; 5:disliked
-51,36,F,"Berlin, Germany","sci-fi, action",1:liked; 2:disliked; 3:liked; 4:disliked; 5:skipped
-52,65,F,"Tehran, Iran","adventure, comedy, horror",1:skipped; 2:skipped; 3:disliked; 4:disliked; 5:liked
-53,33,M,"Sydney, Australia","romance, anime, comedy, action, horror",1:disliked; 2:watched; 3:watched; 4:skipped; 5:disliked
-54,52,M,"Berlin, Germany","adventure, comedy, thriller, romance, anime",1:skipped; 2:disliked; 3:watched; 4:liked; 5:skipped
-55,21,M,"Cape Town, South Africa","romance, documentary, thriller",1:skipped; 2:skipped; 3:liked; 4:liked; 5:disliked
-56,41,M,"Madrid, Spain","sci-fi, action, disturbing",1:watched; 2:skipped; 3:skipped; 4:watched; 5:liked
-57,43,M,"Mexico City, Mexico","fantasy, documentary, sci-fi, romance, disturbing",1:liked; 2:watched; 3:disliked; 4:disliked; 5:watched
-58,38,F,"Toronto, Canada","drama, anime",1:watched; 2:liked; 3:liked; 4:liked; 5:watched
-59,64,F,"Mumbai, India","thriller, action",1:disliked; 2:watched; 3:watched; 4:skipped; 5:liked
-60,54,M,"Cape Town, South Africa","documentary, sci-fi, fantasy, romance, comedy",1:skipped; 2:skipped; 3:watched; 4:skipped; 5:skipped
-61,28,M,"Mexico City, Mexico","adventure, thriller, action, drama",1:disliked; 2:skipped; 3:skipped; 4:liked; 5:liked
-62,48,F,"Tokyo, Japan","anime, romance, horror",1:skipped; 2:liked; 3:disliked; 4:liked; 5:disliked
-63,18,M,"Tokyo, Japan","action, disturbing, sci-fi, romance",1:skipped; 2:liked; 3:skipped; 4:watched; 5:skipped
-64,39,F,"Cape Town, South Africa","comedy, thriller, fantasy",1:disliked; 2:skipped; 3:watched; 4:liked; 5:disliked
-65,40,F,"Paris, France","fantasy, comedy, documentary, thriller",1:skipped; 2:watched; 3:watched; 4:skipped; 5:disliked
-66,29,M,"Sydney, Australia","disturbing, anime, comedy, thriller, sci-fi",1:disliked; 2:skipped; 3:watched; 4:disliked; 5:skipped
-67,37,F,"Mumbai, India","romance, thriller, fantasy, drama, horror",1:skipped; 2:watched; 3:liked; 4:liked; 5:skipped
-68,29,M,"Sydney, Australia","adventure, disturbing, fantasy, documentary",1:skipped; 2:liked; 3:liked; 4:disliked; 5:disliked
-69,64,F,"Madrid, Spain","thriller, drama, disturbing, anime, comedy",1:disliked; 2:watched; 3:liked; 4:watched; 5:skipped
-70,32,M,"Sydney, Australia","adventure, sci-fi",1:skipped; 2:skipped; 3:skipped; 4:liked; 5:liked
-71,40,F,"Mexico City, Mexico","disturbing, comedy, anime",1:skipped; 2:skipped; 3:disliked; 4:watched; 5:watched
-72,44,M,"Berlin, Germany","documentary, action, anime, horror",1:disliked; 2:watched; 3:skipped; 4:liked; 5:watched
-73,34,M,"Toronto, Canada","romance, horror",1:disliked; 2:disliked; 3:liked; 4:watched; 5:liked
-74,35,M,"Cape Town, South Africa","horror, drama, thriller, documentary",1:skipped; 2:skipped; 3:watched; 4:skipped; 5:disliked
-75,52,F,"Paris, France","disturbing, sci-fi, horror, romance",1:watched; 2:watched; 3:skipped; 4:liked; 5:disliked
-76,46,M,"Paris, France","action, thriller, adventure, horror",1:disliked; 2:skipped; 3:skipped; 4:watched; 5:liked
-77,30,M,"Madrid, Spain","drama, fantasy, disturbing, horror",1:watched; 2:disliked; 3:skipped; 4:disliked; 5:disliked
-78,50,F,"Paris, France","romance, horror",1:skipped; 2:liked; 3:skipped; 4:liked; 5:skipped
-79,55,F,"New York, USA","fantasy, sci-fi",1:liked; 2:disliked; 3:skipped; 4:disliked; 5:watched
-80,28,M,"Paris, France","horror, action, documentary",1:watched; 2:liked; 3:liked; 4:watched; 5:skipped
-81,65,F,"Sydney, Australia","comedy, adventure, romance, sci-fi",1:watched; 2:liked; 3:disliked; 4:watched; 5:disliked
-82,33,M,"Tehran, Iran","horror, sci-fi, comedy",1:liked; 2:disliked; 3:disliked; 4:watched; 5:liked
-83,39,F,"Madrid, Spain","horror, romance, disturbing",1:liked; 2:disliked; 3:disliked; 4:watched; 5:watched
-84,65,F,"Berlin, Germany","comedy, sci-fi, anime, horror",1:disliked; 2:liked; 3:watched; 4:watched; 5:skipped
-85,41,F,"Tehran, Iran","adventure, horror",1:skipped; 2:disliked; 3:watched; 4:disliked; 5:skipped
-86,65,M,"Sydney, Australia","comedy, horror, sci-fi, fantasy, romance",1:skipped; 2:watched; 3:liked; 4:watched; 5:watched
-87,23,M,"London, UK","anime, thriller, horror",1:watched; 2:liked; 3:disliked; 4:skipped; 5:disliked
-88,31,M,"Paris, France","thriller, drama, comedy, sci-fi",1:disliked; 2:skipped; 3:watched; 4:watched; 5:watched
-89,20,M,"Cape Town, South Africa","adventure, documentary, romance, action, horror",1:liked; 2:disliked; 3:disliked; 4:skipped; 5:skipped
-90,57,F,"New York, USA","comedy, romance, horror, action",1:liked; 2:skipped; 3:disliked; 4:watched; 5:disliked
-91,63,M,"London, UK","horror, fantasy",1:skipped; 2:skipped; 3:disliked; 4:skipped; 5:disliked
-92,18,M,"Tokyo, Japan","thriller, comedy, horror, romance",1:liked; 2:watched; 3:disliked; 4:liked; 5:liked
-93,28,F,"Mumbai, India","horror, disturbing, drama, sci-fi",1:skipped; 2:watched; 3:skipped; 4:disliked; 5:watched
-94,37,F,"New York, USA","comedy, thriller, horror, adventure, sci-fi",1:disliked; 2:liked; 3:liked; 4:watched; 5:liked
-95,24,M,"Cape Town, South Africa","thriller, action, horror, comedy, drama",1:disliked; 2:disliked; 3:disliked; 4:liked; 5:liked
-96,31,F,"Berlin, Germany","horror, thriller",1:skipped; 2:liked; 3:liked; 4:watched; 5:disliked
-97,45,M,"Cape Town, South Africa","romance, fantasy, anime",1:skipped; 2:skipped; 3:liked; 4:disliked; 5:liked
-98,30,M,"Mexico City, Mexico","drama, anime, action, adventure, disturbing",1:watched; 2:liked; 3:watched; 4:liked; 5:liked
-99,20,F,"Toronto, Canada","horror, disturbing, fantasy, comedy, sci-fi",1:liked; 2:watched; 3:watched; 4:liked; 5:liked
-100,18,M,"Sydney, Australia","action, anime",1:watched; 2:liked; 3:disliked; 4:disliked; 5:liked
+user_id,age,gender,location,interests
+1,28,F,"Mexico City, Mexico","documentary, romance, fantasy, comedy, drama"
+2,23,M,"Tokyo, Japan","thriller, comedy, drama, disturbing, fantasy"
+3,39,M,"New York, USA","horror, thriller"
+4,20,F,"Mexico City, Mexico","action, drama, anime, comedy, fantasy"
+5,28,M,"Mumbai, India","fantasy, disturbing"
+6,51,F,"London, UK","fantasy, romance"
+7,32,M,"Tehran, Iran","documentary, horror"
+8,44,M,"Cape Town, South Africa","adventure, drama, disturbing, anime, action"
+9,46,M,"Paris, France","horror, drama, comedy, romance"
+10,39,F,"Toronto, Canada","documentary, adventure, thriller"
+11,39,M,"Mumbai, India","anime, fantasy, thriller, action, adventure"
+12,33,F,"Paris, France","romance, thriller"
+13,56,F,"Sydney, Australia","documentary, horror, action, romance"
+14,59,M,"Paris, France","drama, thriller, disturbing"
+15,46,F,"Berlin, Germany","adventure, documentary, comedy, fantasy"
+16,26,M,"Paris, France","fantasy, action"
+17,53,F,"Cape Town, South Africa","romance, thriller"
+18,18,F,"Mexico City, Mexico","thriller, horror, disturbing, documentary"
+19,63,M,"Madrid, Spain","adventure, fantasy, romance"
+20,54,M,"London, UK","fantasy, disturbing, documentary, action"
+21,50,M,"Cape Town, South Africa","romance, thriller, disturbing"
+22,62,M,"New York, USA","romance, documentary, disturbing"
+23,60,F,"Mexico City, Mexico","drama, adventure"
+24,40,M,"Cape Town, South Africa","comedy, adventure, anime"
+25,49,M,"Tokyo, Japan","thriller, romance, sci-fi, horror"
+26,51,F,"Berlin, Germany","drama, thriller, anime, horror"
+27,39,F,"Mumbai, India","comedy, action, documentary, romance, drama"
+28,60,F,"Madrid, Spain","fantasy, horror, drama"
+29,62,M,"London, UK","comedy, documentary"
+30,22,F,"London, UK","disturbing, anime, fantasy"
+31,57,F,"Tehran, Iran","horror, sci-fi, thriller, anime, documentary"
+32,28,F,"Toronto, Canada","romance, fantasy"
+33,31,M,"Mumbai, India","comedy, horror, anime, action, fantasy"
+34,41,F,"Madrid, Spain","comedy, documentary, action"
+35,44,M,"New York, USA","disturbing, sci-fi, drama"
+36,54,M,"Sydney, Australia","fantasy, horror"
+37,20,M,"Mexico City, Mexico","drama, adventure, horror, anime, romance"
+38,30,M,"Madrid, Spain","action, adventure, anime, horror"
+39,26,F,"Madrid, Spain","adventure, comedy"
+40,50,M,"Mumbai, India","anime, horror, thriller"
+41,19,F,"Tehran, Iran","fantasy, romance, sci-fi, anime"
+42,38,F,"Toronto, Canada","fantasy, adventure, horror"
+43,51,M,"Sydney, Australia","thriller, drama, romance"
+44,64,M,"Toronto, Canada","disturbing, romance, anime"
+45,44,F,"Toronto, Canada","sci-fi, comedy, disturbing, drama"
+46,46,M,"Tokyo, Japan","romance, adventure, comedy"
+47,45,M,"London, UK","anime, sci-fi, documentary, horror"
+48,22,M,"Mexico City, Mexico","drama, action"
+49,48,F,"Paris, France","disturbing, anime, comedy, thriller, sci-fi"
+50,50,F,"Berlin, Germany","action, fantasy, sci-fi"
+51,45,F,"London, UK","fantasy, thriller, disturbing, romance, documentary"
+52,58,F,"New York, USA","action, adventure, comedy"
+53,60,M,"Berlin, Germany","comedy, drama, action"
+54,38,F,"London, UK","horror, action"
+55,25,M,"New York, USA","action, anime, horror, adventure"
+56,54,M,"Tehran, Iran","fantasy, action"
+57,35,M,"Paris, France","adventure, anime, fantasy, sci-fi, horror"
+58,59,M,"Mumbai, India","horror, disturbing, thriller"
+59,50,F,"Paris, France","documentary, adventure, comedy, thriller"
+60,52,F,"Paris, France","thriller, drama, documentary"
+61,50,F,"Mumbai, India","fantasy, drama, anime"
+62,63,F,"New York, USA","fantasy, documentary, romance, drama"
+63,50,F,"Tehran, Iran","romance, fantasy, thriller, action, anime"
+64,27,F,"Madrid, Spain","horror, comedy, fantasy"
+65,58,M,"Tehran, Iran","comedy, documentary, action"
+66,35,M,"Sydney, Australia","drama, documentary, disturbing"
+67,52,M,"Tokyo, Japan","fantasy, anime, horror"
+68,41,F,"Tokyo, Japan","action, drama, fantasy, disturbing, anime"
+69,30,M,"Tehran, Iran","comedy, adventure, disturbing, horror"
+70,47,M,"Sydney, Australia","thriller, anime, fantasy, horror, comedy"
+71,30,F,"Berlin, Germany","adventure, anime, drama, action, fantasy"
+72,34,F,"Mexico City, Mexico","sci-fi, thriller, disturbing"
+73,34,M,"Tehran, Iran","fantasy, anime, drama, romance, comedy"
+74,43,M,"Sydney, Australia","disturbing, documentary, horror, drama"
+75,65,F,"Sydney, Australia","anime, sci-fi, drama, thriller"
+76,40,F,"Madrid, Spain","horror, documentary, adventure, action, drama"
+77,45,M,"Sydney, Australia","action, fantasy, thriller, horror, romance"
+78,53,M,"Toronto, Canada","sci-fi, comedy"
+79,49,M,"Mumbai, India","drama, horror, thriller, adventure, sci-fi"
+80,21,F,"Mumbai, India","documentary, thriller"
+81,37,M,"Tokyo, Japan","documentary, adventure, anime, action"
+82,36,M,"Cape Town, South Africa","thriller, fantasy, comedy, adventure"
+83,50,M,"Tokyo, Japan","horror, thriller, anime, romance, sci-fi"
+84,58,F,"Tehran, Iran","horror, fantasy, adventure, romance, sci-fi"
+85,19,F,"Madrid, Spain","documentary, romance, comedy"
+86,50,F,"Mexico City, Mexico","disturbing, thriller, documentary, comedy"
+87,18,M,"Cape Town, South Africa","sci-fi, drama, disturbing"
+88,49,M,"Madrid, Spain","documentary, disturbing, thriller, fantasy"
+89,23,M,"Madrid, Spain","romance, comedy, sci-fi"
+90,37,F,"Madrid, Spain","anime, disturbing, documentary, thriller"
+91,48,M,"New York, USA","drama, romance"
+92,64,F,"Mumbai, India","fantasy, drama"
+93,55,M,"Toronto, Canada","comedy, drama, romance, horror"
+94,36,F,"Tokyo, Japan","anime, romance, adventure, disturbing, fantasy"
+95,25,M,"Toronto, Canada","horror, sci-fi, documentary, romance"
+96,35,M,"Cape Town, South Africa","comedy, action, adventure"
+97,46,M,"Cape Town, South Africa","romance, disturbing"
+98,18,M,"Cape Town, South Africa","anime, action, horror, thriller, fantasy"
+99,44,F,"Madrid, Spain","sci-fi, comedy, action, disturbing, drama"
+100,24,F,"Madrid, Spain","disturbing, anime, adventure"
