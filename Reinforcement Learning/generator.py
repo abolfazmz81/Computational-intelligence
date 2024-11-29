@@ -52,7 +52,7 @@ content_items = []
 for content_id in range(1, 51):
     # Random content data
     title = f"The movie {content_id}"
-    genre = random.choice(genres)
+    genre = random.sample(genres, random.randint(2, 4))
     popularity = round(random.uniform(0.1, 1.0), 2)  # Popularity score between 0.1 and 1.0
     duration = random.randint(60, 180) # Length of the movie
     price = round(random.uniform(5, 30), 2)
