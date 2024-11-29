@@ -137,6 +137,16 @@ def main():
     # Train the agent
     agent.train(interactions_data, epochs=100)
 
+    # Select 5 random users
+    random_user = random.sample([i for i in range(0,101)],5)
+    random_user = list(random_user)
+    random_user.sort()
+    print("\n")
+    # Make a recommendation for random users
+    for user_id in random_user:
+        recommended_content = agent.recommend(user_id, [content['content_id'] for content in content_data])
+        print(f"Recommended content for user {user_id}: Content ID {recommended_content}")
+        print(f"user interests: {user_profiles.__getitem__(user_id)["interests"]} vs content genre: {content_data.__getitem__(recommended_content-1)["genre"]}\n")
 
 
 if __name__ == '__main__':
