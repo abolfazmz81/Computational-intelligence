@@ -114,13 +114,27 @@ def load_content_data(filename='available_content.csv'):
             content_data.append({'content_id': int(row['content_id']), 'genre': row['genre']})
     return content_data
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+
+# Main function to initialize agent and train it
+def main():
+    user_profiles = load_user_profiles('user_profiles.csv')
+    content_data = load_content_data('available_content.csv')
+
+    # Initialize Q-learning agent
+    agent = QLearningAgent(user_profiles, content_data)
+
+    # Simulate training using the interaction data
+    interactions_data = []
+    with open('user_content_interactions.csv', mode='r', newline='') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            interactions_data.append({
+                'user_id': int(row['user_id']),
+                'content_id': int(row['content_id']),
+                'interaction': row['interaction']
+            })
 
 
-# Press the green button in the gutter to run the script.
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    main()
