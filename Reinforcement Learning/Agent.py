@@ -89,6 +89,12 @@ class QLearningAgent:
             if epoch % 10 == 0:
                 print(f"Epoch {epoch}/{epochs} completed.")
 
+    def recommend(self, user_id, content_ids):
+        """
+        Recommend the best content based on the Q-table for a given user.
+        """
+        return self.get_action(user_id, content_ids)
+
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
