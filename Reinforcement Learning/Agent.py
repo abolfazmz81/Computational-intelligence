@@ -95,6 +95,24 @@ class QLearningAgent:
         """
         return self.get_action(user_id, content_ids)
 
+# Load user profiles and content data
+def load_user_profiles(filename='user_profiles.csv'):
+    user_profiles = []
+    with open(filename, mode='r', newline='') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            interests = row['interests'].split(', ')
+            user_profiles.append({'user_id': int(row['user_id']), 'interests': interests})
+    return user_profiles
+
+
+def load_content_data(filename='available_content.csv'):
+    content_data = []
+    with open(filename, mode='r', newline='') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            content_data.append({'content_id': int(row['content_id']), 'genre': row['genre']})
+    return content_data
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
