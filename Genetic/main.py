@@ -152,13 +152,17 @@ class TrafficSystem:
 class DeliveryGene:
     """Represents a single solution in the genetic algorithm."""
 
-    def __init__(self, vehicles: List[Vehicle], packages: List[Package]):
+    def __init__(self, grid_size: int, vehicles: List[Vehicle], packages: List[Package],
+                 distance_matrix: DistanceMatrix, traffic_system: TrafficSystem):
+        self.grid_size = grid_size
         self.vehicles = vehicles
         self.packages = packages
+        self.distance_matrix = distance_matrix
+        self.traffic_system = traffic_system
         self.fitness_score = float('inf')
         self.PRIORITY_TIME_LIMIT = 2 * 60  # 2 hours in minutes
         self.WORKDAY_LIMIT = 8 * 60  # 8 hours in minutes
-        # Initialize random valid solution
+        self.start_time = datetime.now().replace(hour=8, minute=0)  # Start at 8 AM
         self.initialize_random_solution()
 
     def initialize_random_solution(self):
@@ -221,29 +225,29 @@ class DeliveryGene:
 
         return total_time
 
-    def calculate_delivery_times(self, vehicle: Vehicle) -> List[float]:
-        """Calculates actual delivery times for each package in a vehicle's route."""
-        delivery_times = []
-        current_time = 0
+    def calculate_route_times(self, vehicle: Vehicle, route: List[Tuple[int, int]]) -> List[float]:
+        """Calculates delivery times for each stop on a route."""
+        current_time = self.start_time
         current_location = vehicle.current_location
+        delivery_times = []
 
-        for package in vehicle.packages:
-            distance = np.sqrt(
-                (package.location[1] - current_location[1]) ** 2 +
-                (package.location[0] - current_location[0]) ** 2
+        for location in route:
+            distance = self.distance_matrix.get_distance(current_location, location)
+            traffic_coef = self.traffic_system.get_traffic_coefficient(
+                current_location, location, current_time
             )
-            traffic_multiplier = 1.0 + random.random()
-            travel_time = distance * traffic_multiplier
-            current_time += travel_time
-            delivery_times.append(current_time)
-            current_location = package.location
+
+            travel_time = distance * traffic_coef
+            current_time += timedelta(minutes=int(travel_time))
+            delivery_times.append((current_time - self.start_time).total_seconds() / 60)
+            current_location = location
 
         return delivery_times
 
-    def calculate_fitness(self, w1: float = 1.0, w2: float = 1.0, w3: float = 2.0) -> float:
+    def calculate_fitness(self, w1: float = 1.0, w2: float = 2.0, w3: float = 3.0) -> float:
         """
-        Calculates fitness score based on given formula with additional priority time penalty.
-        w1: weight for delay penalty
+        Calculates fitness with priority package time penalties.
+        w1: weight for general delay penalty
         w2: weight for capacity penalty
         w3: weight for priority delivery time penalty
         """
@@ -256,27 +260,23 @@ class DeliveryGene:
             if not vehicle.packages:
                 continue
 
-            # Calculate route metrics
+            # Get route locations
             route_locations = [p.location for p in vehicle.packages]
-            route_time = self.calculate_route_time(
-                vehicle.current_location,
-                route_locations
-            )
 
-            # Calculate actual delivery times for each package
-            delivery_times = self.calculate_delivery_times(vehicle)
+            # Calculate delivery times
+            delivery_times = self.calculate_route_times(vehicle, route_locations)
 
-            # Update package delivery times and check priority constraints
+            # Check constraints and update penalties
             for package, delivery_time in zip(vehicle.packages, delivery_times):
-                package.delivery_time = delivery_time
                 if package.priority and delivery_time > self.PRIORITY_TIME_LIMIT:
-                    # Penalty increases with the amount of delay
                     priority_time_penalty += (delivery_time - self.PRIORITY_TIME_LIMIT)
 
-            # Add penalties for constraint violations
-            if route_time > self.WORKDAY_LIMIT:
-                delay_penalty += route_time - self.WORKDAY_LIMIT
+                package.delivery_time = delivery_time
 
+                if delivery_time > self.WORKDAY_LIMIT:
+                    delay_penalty += delivery_time - self.WORKDAY_LIMIT
+
+            # Check capacity constraint
             current_weight = sum(p.weight for p in vehicle.packages)
             if current_weight > vehicle.max_capacity:
                 capacity_penalty += current_weight - vehicle.max_capacity
@@ -284,18 +284,16 @@ class DeliveryGene:
             # Calculate total distance
             current = vehicle.current_location
             for location in route_locations:
-                distance = np.sqrt(
-                    (location[1] - current[1]) ** 2 +
-                    (location[0] - current[0]) ** 2
-                )
+                distance = self.distance_matrix.get_distance(current, location)
                 total_distance += distance
                 current = location
 
+        # Calculate final fitness score using all penalties
         self.fitness_score = (
                 total_distance +
                 w1 * delay_penalty +
                 w2 * capacity_penalty +
-                w3 * priority_time_penalty  # New penalty term
+                w3 * priority_time_penalty  # Higher weight for priority package delays
         )
         return self.fitness_score
 
