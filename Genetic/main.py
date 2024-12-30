@@ -1,14 +1,15 @@
 import numpy as np
 from dataclasses import dataclass
-from typing import List, Tuple
+from typing import List, Tuple, Dict
 import random
+from datetime import datetime, timedelta
 
 
 @dataclass
 class Package:
     """Represents a package with its properties."""
     id: int
-    location: Tuple[float, float]  # (x, y) coordinates
+    location: Tuple[int, int]  # (x, y) coordinates
     priority: bool  # True if high priority
     weight: float
     delivery_time: float = 0  # Actual delivery time after routing
@@ -20,10 +21,132 @@ class Vehicle:
     """Represents a delivery vehicle with its constraints."""
     id: int
     max_capacity: float
-    current_location: Tuple[float, float]
+    current_location: Tuple[int, int]
     packages: List[Package] = None
     total_distance: float = 0
     route_duration: float = 0
+
+
+class DistanceMatrix:
+    """Manages pre-calculated distances between all grid points."""
+
+    def __init__(self, grid_size: int):
+        self.grid_size = grid_size
+        # Calculate total number of points in the grid
+        self.total_points = grid_size * grid_size
+        # Create the distance matrix
+        self.matrix = self._initialize_distances()
+
+    def _initialize_distances(self) -> np.ndarray:
+        """Creates a matrix containing distances between all grid points using the specified formula."""
+        matrix = np.zeros((self.total_points, self.total_points))
+
+        # Calculate distances between all pairs of points
+        for i in range(self.total_points):
+            # Convert linear index to grid coordinates
+            x1, y1 = i // self.grid_size, i % self.grid_size
+
+            for j in range(i + 1, self.total_points):
+                # Convert linear index to grid coordinates
+                x2, y2 = j // self.grid_size, j % self.grid_size
+
+                # Calculate distance using the formula √((y₂-y₁)² + (x₂-x₁)²)
+                distance = np.sqrt((y2 - y1) ** 2 + (x2 - x1) ** 2)
+
+                # Distance matrix is symmetric
+                matrix[i][j] = distance
+                matrix[j][i] = distance
+
+        return matrix
+
+    def get_distance(self, point1: Tuple[int, int], point2: Tuple[int, int]) -> float:
+        """Retrieves the pre-calculated distance between two grid points."""
+        # Convert grid coordinates to linear indices
+        idx1 = point1[0] * self.grid_size + point1[1]
+        idx2 = point2[0] * self.grid_size + point2[1]
+        return self.matrix[idx1][idx2]
+
+
+class TrafficSystem:
+    """Manages dynamic traffic coefficients that change based on time and location."""
+
+    def __init__(self, grid_size: int):
+        self.grid_size = grid_size
+        # Define rush hours (8 AM and 5 PM)
+        self.rush_hours = [8, 17]
+        # Create hourly traffic patterns
+        self.hourly_patterns = self._create_hourly_patterns()
+        # Create congestion zones
+        self.congestion_zones = self._create_congestion_zones()
+
+    def _create_hourly_patterns(self) -> Dict[int, float]:
+        """Creates traffic multipliers for each hour of the day."""
+        patterns = {}
+        for hour in range(24):
+            if hour in self.rush_hours:
+                # Rush hour traffic (1.5-2.0x)
+                patterns[hour] = 1.5 + random.random() * 0.5
+            elif any(abs(hour - rush) <= 1 for rush in self.rush_hours):
+                # Near rush hour (1.3-1.7x)
+                patterns[hour] = 1.3 + random.random() * 0.4
+            else:
+                # Normal hours (1.0-1.3x)
+                patterns[hour] = 1.0 + random.random() * 0.3
+        return patterns
+
+    def _create_congestion_zones(self) -> List[Dict]:
+        """Creates areas of consistently higher traffic."""
+        zones = []
+        # Create a congested city center
+        center = self.grid_size // 2
+
+        # Add central business district
+        zones.append({
+            'center': (center, center),
+            'radius': 2,
+            'multiplier': 1.5 + random.random() * 0.3
+        })
+
+        # Add random congestion zones
+        num_zones = max(3, self.grid_size // 3)
+        for _ in range(num_zones):
+            zones.append({
+                'center': (random.randint(0, self.grid_size - 1),
+                           random.randint(0, self.grid_size - 1)),
+                'radius': 1,
+                'multiplier': 1.2 + random.random() * 0.3
+            })
+        return zones
+
+    def get_traffic_coefficient(self, point1: Tuple[int, int], point2: Tuple[int, int],
+                                current_time: datetime) -> float:
+        """Calculates the current traffic coefficient between two points."""
+        hour = current_time.hour
+        base_coefficient = self.hourly_patterns[hour]
+
+        # Check if route passes through congestion zones
+        for zone in self.congestion_zones:
+            if self._route_crosses_zone(point1, point2, zone):
+                base_coefficient *= zone['multiplier']
+
+        # Add random variation (±10%)
+        variation = 0.9 + random.random() * 0.2
+
+        return base_coefficient * variation
+
+    def _route_crosses_zone(self, start: Tuple[int, int], end: Tuple[int, int],
+                            zone: Dict) -> bool:
+        """Determines if a route passes through a congestion zone."""
+        zone_center = zone['center']
+        # Check if either endpoint is in the zone
+        for point in [start, end]:
+            distance_to_center = np.sqrt(
+                (point[0] - zone_center[0]) ** 2 +
+                (point[1] - zone_center[1]) ** 2
+            )
+            if distance_to_center <= zone['radius']:
+                return True
+        return False
 
 
 class DeliveryGene:
