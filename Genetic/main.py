@@ -318,6 +318,8 @@ class GeneticAlgorithm:
     def initialize_population(self):
         """Creates initial population of random valid solutions."""
         for _ in range(self.population_size):
+            for v in self.vehicles:
+                v.packages = None
             gene = DeliveryGene(
                 self.grid_size,
                 self.vehicles.copy(),
@@ -337,8 +339,7 @@ class GeneticAlgorithm:
 
     def crossover(self, parent1: DeliveryGene, parent2: DeliveryGene) -> Tuple[DeliveryGene, DeliveryGene]:
         """
-        Performs crossover between two parent solutions while maintaining solution validity.
-        Uses a modified order crossover that preserves vehicle capacity and priority constraints.
+        Performs crossover between two parent solutions.
         """
         # Create new empty offspring
         child1 = DeliveryGene(self.grid_size, self.vehicles.copy(), [],
@@ -371,7 +372,7 @@ class GeneticAlgorithm:
 
     def _fill_remaining_packages(self, child: DeliveryGene, existing_packages: List[Package],
                                  parent_packages: List[Package], vehicle_idx: int):
-        """Helper method to fill remaining packages, could lead to inconsistency."""
+        """Helper method to fill remaining packages."""
         current_vehicle = child.vehicles[vehicle_idx]
         current_vehicle.packages = existing_packages.copy()
 
@@ -401,15 +402,13 @@ class GeneticAlgorithm:
                 p1 = random.choice(v1.packages)
                 p2 = random.choice(v2.packages)
 
-                # Only swap if constraints are maintained
-                if (gene.can_vehicle_handle_package(v2, p1) and
-                        gene.can_vehicle_handle_package(v1, p2)):
-                    v1.packages.remove(p1)
-                    v2.packages.remove(p2)
-                    v1.packages.append(p2)
-                    v2.packages.append(p1)
-                    p1.assigned_vehicle = v2.id
-                    p2.assigned_vehicle = v1.id
+                # Swap packages
+                v1.packages.remove(p1)
+                v2.packages.remove(p2)
+                v1.packages.append(p2)
+                v2.packages.append(p1)
+                p1.assigned_vehicle = v2.id
+                p2.assigned_vehicle = v1.id
 
         elif mutation_type == 'reorder':
             # Randomly reorder packages within a vehicle
@@ -419,13 +418,15 @@ class GeneticAlgorithm:
 
         else:  # reassign
             # Try to reassign a high-priority package to a different vehicle
-            priority_packages = [p for v in gene.vehicles for p in v.packages if p.priority]
+            try:
+                priority_packages = [p for v in gene.vehicles for p in v.packages if p.priority]
+            except:
+                return gene
             if priority_packages:
                 package = random.choice(priority_packages)
                 current_vehicle = next(v for v in gene.vehicles if package in v.packages)
                 possible_vehicles = [v for v in gene.vehicles
-                                     if v != current_vehicle and
-                                     gene.can_vehicle_handle_package(v, package)]
+                                     if v != current_vehicle]
 
                 if possible_vehicles:
                     new_vehicle = random.choice(possible_vehicles)
@@ -485,3 +486,41 @@ class GeneticAlgorithm:
 
         return min(self.population, key=lambda x: x.fitness_score)
 
+
+# Reduce capacity to see Yes as a sign of capacity penalty
+v1 = Vehicle(0, 100, (0, 0))
+v2 = Vehicle(1, 50, (0, 0))
+v3 = Vehicle(2, 100, (0, 0))
+
+p1 = Package(0, (random.randint(0, 10), random.randint(0, 10)), True, random.randint(1, 20))
+p2 = Package(1, (random.randint(0, 10), random.randint(0, 10)), False, random.randint(1, 20))
+p3 = Package(2, (random.randint(0, 10), random.randint(0, 10)), False, random.randint(1, 20))
+
+p4 = Package(3, (random.randint(0, 10), random.randint(0, 10)), True, random.randint(1, 20))
+p5 = Package(4, (random.randint(0, 10), random.randint(0, 10)), False, random.randint(1, 20))
+p6 = Package(5, (random.randint(0, 10), random.randint(0, 10)), False, random.randint(1, 20))
+
+packs = list()
+cars = list()
+
+packs.append(p1)
+packs.append(p2)
+packs.append(p3)
+
+packs.append(p4)
+packs.append(p5)
+packs.append(p6)
+
+cars.append(v1)
+cars.append(v2)
+cars.append(v3)
+
+distance_mtr = DistanceMatrix(11)
+traffic = TrafficSystem(11)
+
+population = GeneticAlgorithm(6, 11, cars, packs, distance_mtr, traffic)
+
+pop1 = population.evolve(10)
+for a in pop1.vehicles:
+    print(a)
+print(pop1.fitness_score)
