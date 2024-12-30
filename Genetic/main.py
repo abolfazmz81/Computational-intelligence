@@ -297,3 +297,191 @@ class DeliveryGene:
         )
         return self.fitness_score
 
+
+class GeneticAlgorithm:
+    """
+    Implements genetic algorithm operators for the package delivery optimization problem.
+    """
+
+    def __init__(self, population_size: int, grid_size: int, vehicles: List[Vehicle],
+                 packages: List[Package], distance_matrix: DistanceMatrix,
+                 traffic_system: TrafficSystem):
+        self.population_size = population_size
+        self.grid_size = grid_size
+        self.vehicles = vehicles
+        self.packages = packages
+        self.distance_matrix = distance_matrix
+        self.traffic_system = traffic_system
+        self.population = []
+        self.initialize_population()
+
+    def initialize_population(self):
+        """Creates initial population of random valid solutions."""
+        for _ in range(self.population_size):
+            gene = DeliveryGene(
+                self.grid_size,
+                self.vehicles.copy(),
+                self.packages.copy(),
+                self.distance_matrix,
+                self.traffic_system
+            )
+            self.population.append(gene)
+
+    def tournament_selection(self, tournament_size: int = 3) -> DeliveryGene:
+        """
+        Selects the best gene from a random tournament.
+        Uses tournament selection to maintain diversity while favoring better solutions.
+        """
+        tournament = random.sample(self.population, tournament_size)
+        return min(tournament, key=lambda x: x.fitness_score)
+
+    def crossover(self, parent1: DeliveryGene, parent2: DeliveryGene) -> Tuple[DeliveryGene, DeliveryGene]:
+        """
+        Performs crossover between two parent solutions while maintaining solution validity.
+        Uses a modified order crossover that preserves vehicle capacity and priority constraints.
+        """
+        # Create new empty offspring
+        child1 = DeliveryGene(self.grid_size, self.vehicles.copy(), [],
+                              self.distance_matrix, self.traffic_system)
+        child2 = DeliveryGene(self.grid_size, self.vehicles.copy(), [],
+                              self.distance_matrix, self.traffic_system)
+
+        # Choose random crossover points for each vehicle
+        for vehicle_idx in range(len(self.vehicles)):
+            if not parent1.vehicles[vehicle_idx].packages or not parent2.vehicles[vehicle_idx].packages:
+                continue
+
+            # Get package lists from both parents for this vehicle
+            p1_packages = parent1.vehicles[vehicle_idx].packages
+            p2_packages = parent2.vehicles[vehicle_idx].packages
+
+            # Choose crossover points
+            cx_point1 = random.randint(0, len(p1_packages))
+            cx_point2 = random.randint(cx_point1, len(p1_packages))
+
+            # Create children package lists
+            child1_packages = p1_packages[cx_point1:cx_point2]
+            child2_packages = p2_packages[cx_point1:cx_point2]
+
+            # Fill remaining positions while maintaining constraints
+            self._fill_remaining_packages(child1, child1_packages, p2_packages, vehicle_idx)
+            self._fill_remaining_packages(child2, child2_packages, p1_packages, vehicle_idx)
+
+        return child1, child2
+
+    def _fill_remaining_packages(self, child: DeliveryGene, existing_packages: List[Package],
+                                 parent_packages: List[Package], vehicle_idx: int):
+        """Helper method to fill remaining packages, could lead to inconsistency."""
+        current_vehicle = child.vehicles[vehicle_idx]
+        current_vehicle.packages = existing_packages.copy()
+
+        # Try to add remaining packages from parent
+        for package in parent_packages:
+            if package not in existing_packages:
+                current_vehicle.packages.append(package)
+                package.assigned_vehicle = current_vehicle.id
+
+    def mutate(self, gene: DeliveryGene, mutation_rate: float = 0.1) -> DeliveryGene:
+        """
+        Applies mutation operators to a solution with given probability.
+        Implements three types of mutations:
+        1. Swap packages between vehicles
+        2. Change package order within a vehicle
+        3. Reassign high-priority package to different vehicle
+        """
+        if random.random() > mutation_rate:
+            return gene
+
+        mutation_type = random.choice(['swap', 'reorder', 'reassign'])
+
+        if mutation_type == 'swap':
+            # Swap packages between two random vehicles
+            v1, v2 = random.sample(gene.vehicles, 2)
+            if v1.packages and v2.packages:
+                p1 = random.choice(v1.packages)
+                p2 = random.choice(v2.packages)
+
+                # Only swap if constraints are maintained
+                if (gene.can_vehicle_handle_package(v2, p1) and
+                        gene.can_vehicle_handle_package(v1, p2)):
+                    v1.packages.remove(p1)
+                    v2.packages.remove(p2)
+                    v1.packages.append(p2)
+                    v2.packages.append(p1)
+                    p1.assigned_vehicle = v2.id
+                    p2.assigned_vehicle = v1.id
+
+        elif mutation_type == 'reorder':
+            # Randomly reorder packages within a vehicle
+            vehicle = random.choice([v for v in gene.vehicles if v.packages])
+            if vehicle:
+                random.shuffle(vehicle.packages)
+
+        else:  # reassign
+            # Try to reassign a high-priority package to a different vehicle
+            priority_packages = [p for v in gene.vehicles for p in v.packages if p.priority]
+            if priority_packages:
+                package = random.choice(priority_packages)
+                current_vehicle = next(v for v in gene.vehicles if package in v.packages)
+                possible_vehicles = [v for v in gene.vehicles
+                                     if v != current_vehicle and
+                                     gene.can_vehicle_handle_package(v, package)]
+
+                if possible_vehicles:
+                    new_vehicle = random.choice(possible_vehicles)
+                    current_vehicle.packages.remove(package)
+                    new_vehicle.packages.append(package)
+                    package.assigned_vehicle = new_vehicle.id
+
+        return gene
+
+    def evolve(self, generations: int, elite_size: int = 2,
+               tournament_size: int = 3, mutation_rate: float = 0.1) -> DeliveryGene:
+        """
+        Evolves the population for the specified number of generations.
+        Implements elitism to preserve the best solutions.
+
+        Args:
+            generations: Number of generations to evolve
+            elite_size: Number of the best solutions to preserve in each generation
+            tournament_size: Size of tournament for selection
+            mutation_rate: Probability of mutation for each offspring
+
+        Returns:
+            Best solution found
+        """
+        for generation in range(generations):
+            # Calculate fitness for all genes
+            for gene in self.population:
+                gene.calculate_fitness()
+
+            # Sort population by fitness
+            self.population.sort(key=lambda x: x.fitness_score)
+
+            # Keep track of best solution
+            best_solution = self.population[0]
+
+            # Create new population starting with elites
+            new_population = self.population[:elite_size]
+
+            # Fill rest of population with offspring
+            while len(new_population) < self.population_size:
+                # Select parents using tournament selection
+                parent1 = self.tournament_selection(tournament_size)
+                parent2 = self.tournament_selection(tournament_size)
+
+                # Create offspring through crossover
+                child1, child2 = self.crossover(parent1, parent2)
+
+                # Apply mutation
+                child1 = self.mutate(child1, mutation_rate)
+                child2 = self.mutate(child2, mutation_rate)
+
+                # Add valid offspring to new population
+                new_population.extend([child1, child2])
+
+            # Trim population to exact size if needed
+            self.population = new_population[:self.population_size]
+
+        return min(self.population, key=lambda x: x.fitness_score)
+
