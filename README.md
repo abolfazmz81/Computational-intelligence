@@ -15,7 +15,7 @@ This repository contains multiple projects that explore various computational in
 
 ## Project Details
 
-### Project 1: [Genetic]
+### Project 1: Genetic
 
 **Description:**  
 This project provides a solution to the optimal route problem for a package delivery company using the Genetic Algorithm. It also simulates a dynamic city environment, including factors like changing traffic conditions.
@@ -27,7 +27,7 @@ This project provides a solution to the optimal route problem for a package deli
 - Uses Tournament Selection and Single-Point Crossover.
 - Applies penalties for general delays, priority package delays, and exceeding capacity limits.
 
-**Directory:** `[./Genetic]`(./Genetic)
+**Directory:** [`./Genetic`](./Genetic)
 
 ## Installation and Usage
 
