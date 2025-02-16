@@ -32,7 +32,7 @@ This project provides a solution to the optimal route problem for a package deli
 ### Project 2: Kmeans
 
 **Description:**  
-This project focuses on analyzing student data and clustering them into five (final K) groups to study their behavior and suggest suitable educational methods
+This project focuses on analyzing student data and clustering them into five (final K) groups to study their behavior and suggest suitable educational methods.
 
 **Features:**
 - Implements methods to handle null values and outlier data.
@@ -41,7 +41,21 @@ This project focuses on analyzing student data and clustering them into five (fi
 - Determines the optimal K and visualizes clustering results using Elbow Method, Silhouette Score, Davies-Bouldin Index, and Gap Statistics.
 - Utilizes Principal Component Analysis (PCA) for dimensionality reduction.
 
-**Directory:** [`./knn`](./knn)
+**Directory:** [`./Kmeans`](./Kmeans)
+
+### Project 3: LVQ
+
+**Description:**  
+his project implements a cheat detection system for the **AlgoNIT** programming competition using LVQ (Learning Vector Quantization) based on participants' data, with two prototypes: **Cheater** and **Not Cheater**
+
+**Features:**
+- Implements LVQ (Learning Vector Quantization) in a separate class for future reuse.
+- Uses Euclidean distance as the primary distance metric.
+- Filters and removes rows with meaningless or invalid values.
+- Applies Min-Max Scaler for data normalization.
+- Evaluates model performance using Accuracy Score.
+
+**Directory:** [`./LVQ`](./LVQ)
 
 ## Installation and Usage
 
