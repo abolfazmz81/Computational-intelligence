@@ -46,7 +46,7 @@ This project focuses on analyzing student data and clustering them into five (fi
 ### Project 3: LVQ
 
 **Description:**  
-his project implements a cheat detection system for the **AlgoNIT** programming competition using LVQ (Learning Vector Quantization) based on participants' data, with two prototypes: **Cheater** and **Not Cheater**
+This project implements a cheat detection system for the **AlgoNIT** programming competition using LVQ (Learning Vector Quantization) based on participants' data, with two prototypes: **Cheater** and **Not Cheater**
 
 **Features:**
 - Implements LVQ (Learning Vector Quantization) in a separate class for future reuse.
@@ -56,6 +56,24 @@ his project implements a cheat detection system for the **AlgoNIT** programming 
 - Evaluates model performance using Accuracy Score.
 
 **Directory:** [`./LVQ`](./LVQ)
+
+### Project 4: MLP
+
+**Description:**  
+This project implements a classification system for input images trained on the MNIST dataset using a four-layer **MLP (Multilayer Perceptron)**. The architecture consists of an input layer with **784 neurons**, two hidden layers with **128 neurons** and **64 neurons**, and an output layer with **10 neurons** for digit classification.
+
+**Features:**
+- Inverts the colors of an input grayscale image.
+- Preprocesses all images in a specified folder, allowing batch testing of multiple images.
+- Uses **ReLU** activation for hidden layers and **Softmax** activation for the output layer.
+- Optimized with **Adam** and trained using **Cross-Entropy** Loss.
+- Trains for 20 epochs and evaluates performance using accuracy.
+- Visualizes training progress by plotting:
+   - Accuracy Graph: Training Accuracy vs. Validation Accuracy.
+   - Loss Graph: Training Loss vs. Validation Loss.
+- Performs a final test using custom handwritten digits.
+
+**Directory:** [`./MLP`](./MLP)
 
 ## Installation and Usage
 
