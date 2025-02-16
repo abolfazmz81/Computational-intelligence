@@ -29,6 +29,20 @@ This project provides a solution to the optimal route problem for a package deli
 
 **Directory:** [`./Genetic`](./Genetic)
 
+### Project 2: Kmeans
+
+**Description:**  
+This project focuses on analyzing student data and clustering them into five (final K) groups to study their behavior and suggest suitable educational methods
+
+**Features:**
+- Implements methods to handle null values and outlier data.
+- Applies One-Hot Encoding to categorical (conceptual) columns.
+- Assigns dynamic weights based on areas of interest.
+- Determines the optimal K and visualizes clustering results using Elbow Method, Silhouette Score, Davies-Bouldin Index, and Gap Statistics.
+- Utilizes Principal Component Analysis (PCA) for dimensionality reduction.
+
+**Directory:** [`./knn`](./knn)
+
 ## Installation and Usage
 
 To run any of these projects locally:
