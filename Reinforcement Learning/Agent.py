@@ -1,4 +1,3 @@
-# This is a sample Python script.
 import random
 import numpy as np
 import csv
@@ -63,7 +62,7 @@ class QLearningAgent:
 
         # Update the Q-value for the current (user_id, content_id) pair using the Q-learning update rule
         self.q_table[(user_id, content_id)][content_id] = current_q_value + ALPHA * (
-                    reward + GAMMA * max_future_q - current_q_value)
+                reward + GAMMA * max_future_q - current_q_value)
 
     def train(self, interactions_data, epochs=100):
         """
@@ -94,6 +93,7 @@ class QLearningAgent:
         Recommend the best content based on the Q-table for a given user.
         """
         return self.get_action(user_id, content_ids)
+
 
 # Load user profiles and content data
 def load_user_profiles(filename='user_profiles.csv'):
@@ -138,7 +138,7 @@ def main():
     agent.train(interactions_data, epochs=100)
 
     # Select 5 random users
-    random_user = random.sample([i for i in range(0,101)],5)
+    random_user = random.sample([i for i in range(0, 101)], 5)
     random_user = list(random_user)
     random_user.sort()
     print("\n")
@@ -146,7 +146,8 @@ def main():
     for user_id in random_user:
         recommended_content = agent.recommend(user_id, [content['content_id'] for content in content_data])
         print(f"Recommended content for user {user_id}: Content ID {recommended_content}")
-        print(f"user interests: {user_profiles.__getitem__(user_id)["interests"]} vs content genre: {content_data.__getitem__(recommended_content-1)["genre"]}\n")
+        print(
+            f"user interests: {user_profiles.__getitem__(user_id)["interests"]} vs content genre: {content_data.__getitem__(recommended_content - 1)["genre"]}\n")
 
 
 if __name__ == '__main__':
