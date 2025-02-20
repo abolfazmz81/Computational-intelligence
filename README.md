@@ -90,6 +90,22 @@ This project implements a recommendation system for an online movie streaming pl
 
 **Directory:** [`./Reinforcement Learning`](./Reinforcement%20Learning)
 
+### Project 6: SOM
+
+**Description:**  
+This project implements a clustering system for the Iris dataset using a **Self-Organizing Map (SOM)** model with a 5×5 grid, provided by the **MiniSom** package. It visualizes the clustering results using a scatter plot.
+
+**Features:**
+- Checks for null values and provides a descriptive analysis of the dataset.
+- Normalizes selected numerical columns using **Min-Max Scaler**, scaling values between 0 and 1.
+- Implements a **5×5 grid** with a **0.1 learning rate**.
+- Uses a radius of 2.5 and trains for 500 iterations.
+- Maps neurons to their corresponding labels for better interpretability.
+- Evaluates performance using Accuracy.
+- Computes and visualizes a **Confusion Matrix** for better result interpretation
+
+**Directory:** [`./SOM`](./SOM)
+
 ## Installation and Usage
 
 To run any of these projects locally:
