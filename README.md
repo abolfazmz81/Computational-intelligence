@@ -75,6 +75,21 @@ This project implements a classification system for input images trained on the 
 
 **Directory:** [`./MLP`](./MLP)
 
+### Project 5: Reinforcement Learning
+
+**Description:**  
+This project implements a recommendation system for an online movie streaming platform using a **Q-Learning agent** and **reinforcement learning**. It suggests movies based on a user's previous interactions and interests. Initially, it generates a random recommendation and predicts user interactions based on genre preferences. Over time, it dynamically adjusts recommendations, ultimately providing a more personalized movie suggestion.
+
+**Features:**
+- Implements a complete classification by separating the Q-agent, data generator, and random initialization recommendation classes.
+- Modular Q-agent class, designed for future reuse.
+- Uses Faker to generate 100 users and 50 content items, exporting the data as a CSV file.
+- Simulates dynamic user interactions based on the match between movie genres and users' favorite genres.
+- Trains for 100 epochs with an exploration rate of 0.2.
+- After training, recommends movies for 5 random users.
+
+**Directory:** [`./Reinforcement Learning`](./Reinforcement%20Learning)
+
 ## Installation and Usage
 
 To run any of these projects locally:
