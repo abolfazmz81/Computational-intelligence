@@ -106,6 +106,19 @@ This project implements a clustering system for the Iris dataset using a **Self-
 
 **Directory:** [`./SOM`](./SOM)
 
+### Project 7: knn
+
+**Description:**  
+This project implements a prediction system using a **K-Nearest Neighbors (KNN)** model. Based on various parameters and properties of an individual, the system predicts whether the person has a **high risk** or **low risk** of a heart attack
+
+**Features:**
+- Determines 6 as the optimal value for K based on various K tests.
+- Sets the test size to 0.2 and the random state to 10 for reproducibility.
+- Evaluates model performance using accuracy.
+- Utilizes K-Fold cross-validation for more reliable performance estimation.
+
+**Directory:** [`./knn`](./knn)
+
 ## Installation and Usage
 
 To run any of these projects locally:
